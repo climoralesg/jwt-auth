@@ -1,5 +1,7 @@
 const express = require('express');
 require('dotenv').config();
+const jwt = require('jsonwebtoken');
+
 
 class Server{
     constructor(){
@@ -11,6 +13,7 @@ class Server{
     }
 
     middlewares=()=>{
+        this.express.set('key',process.env.KEY);
         this.express.use(express.json());
         this.express.use(express.static('public'));
     }
