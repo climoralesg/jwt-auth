@@ -19,7 +19,7 @@ class Server{
     }
 
     routes=()=>{
-        this.express.use('/aplication/index',require('../routes/check.js'));
+        this.express.use('/aplication',require('../routes/jwt.js'));
     }
 
     listen=()=>{
