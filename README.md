@@ -29,13 +29,13 @@ Pasos para la Instalación
 
 #### Crear un token
 
-```http
+```
   GET /aplication/createtoken
 ```
 
 #### Verificar la existencia de un token
 
-```http
+```
   GET /aplication/verifytoken
 ```
 
