@@ -10,6 +10,7 @@
   "author": "climoralesg",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",
     "express": "^4.18.0",
     "jsonwebtoken": "^8.5.1"

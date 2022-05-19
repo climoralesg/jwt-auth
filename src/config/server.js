@@ -20,6 +20,7 @@ class Server{
 
     routes=()=>{
         this.express.use('/aplication',require('../routes/jwt.js'));
+        this.express.use('/aplication',require('../routes/login.js'));
     }
 
     listen=()=>{
