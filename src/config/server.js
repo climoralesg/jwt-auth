@@ -1,15 +1,22 @@
 const express = require('express');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-
+const {connect}=require('./database.js');
 
 class Server{
     constructor(){
         this.port=process.env.PORT;
         this.express=express();
 
+        this.connectDatabase();
         this.middlewares();
         this.routes();
+       
+       
+    }
+
+    connectDatabase=async()=> {
+        await connect();
     }
 
     middlewares=()=>{
