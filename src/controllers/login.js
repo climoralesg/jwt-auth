@@ -7,47 +7,49 @@ const {response} = require("express");
 const {request} = require("express");
 
 const bcrypt=require('bcrypt');
-const saltRounds=10;
 
-const myPlaintextPassword = 'contrasena1234';
-const someOtherPlaintextPassword = 'not_bacon';
 
-/*
-const login=(req=request,res=response)=>{
-    
+
+const changePasswordBcrypt=async(req=request,res=response)=>{
+
+    const password=req.body.password;
+    const saltRounds=parseInt(process.env.SALTROUNDS);
+
     bcrypt.genSalt(saltRounds,function(err,salt){
-        bcrypt.hash(myPlaintextPassword,salt,function(err,hash){
-            console.log("hash",hash);
-
-            bcrypt.compare(myPlaintextPassword,hash,function(err,result){
-                console.log("result",result);    
-            })
-
+        bcrypt.hash(password,salt,function(err,hash){
+            console.log(hash);
+            res.json({respuesta: "Contraseña "+password+" en hash: "+hash +"",status:400});
         })
     })
 
-    const conectar=async()=>{
-        await client.connect();
-        console.log("conectado con exito");
-        const db=client.db(dbName);
-        const collection=db.collection('users');
-        return 'done';
-    }
-
-    conectar().then(console.log).catch(console.error).finally(() => client.close());
-    res.json({respuesta: "Login de Prueba"});
-}
-*/
-const login=(req=request,res=response)=>{
-    const db = connect();
-
-    /*
-    const collection=db.collection('users');
-    return 'done';
-    */
-    res.json({respuesta: "Login de Prueba"});
 }
 
 
-module.exports={login}
+const login = async (req=request,res=response)=>{
+    const password=req.body.password;
+    const userName=req.body.userName;
+    const userToken=req.headers['access-token'];
+
+    jwt.verify(userToken,process.env.KEY,async (err,decode)=>{
+        if(err){
+            res.json({message: "Sin respuesta",status:400}) ;
+        }else{
+            const client = connect();
+            const db=client.db('login')
+            const users=db.collection('users');
+            const query = await users.findOne({ userName: "Claudio" },"");
+            bcrypt.compare(password,query.password,function(err,result){
+                if(result===true){
+                    res.json({respuesta: "Usuario correcto",status:200});
+                }else{
+                    res.json({respuesta: "Usuario correcto y/o contraseña incorrectos",status:400});
+                }
+            });
+        }
+    });
+
+}
+
+
+module.exports={login,changePasswordBcrypt}
 

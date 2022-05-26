@@ -12,15 +12,15 @@ class Database{
 
     connect=async()=>{
         await this.client.connect();
-        //const db=this.client.db(this.databaseName);
+        return this.client;
     }
 
-    getClient=async()=>{
-        return this.client;
+    closeClient=async()=>{
+        return this.client.close();
     }
 
 }
 
 
 
-module.exports=Database;
+module.exports={connect,closeClient};
