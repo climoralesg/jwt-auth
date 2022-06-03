@@ -29,6 +29,7 @@ const login = async (req=request,res=response)=>{
     const password=req.body.password;
     const userName=req.body.userName;
     const userToken=req.headers['access-token'];
+    console.log("userName  ",req.body.userName);
 
     jwt.verify(userToken,process.env.KEY,async (err,decode)=>{
         if(err){
@@ -37,7 +38,7 @@ const login = async (req=request,res=response)=>{
             const client = connect();
             const db=client.db('login')
             const users=db.collection('users');
-            const query = await users.findOne({ userName: "Claudio" },"");
+            const query = await users.findOne({ userName: req.body.userName },"");
             bcrypt.compare(password,query.password,function(err,result){
                 if(result===true){
                     res.json({respuesta: "Usuario correcto",status:200});
