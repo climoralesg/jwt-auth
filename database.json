@@ -1,0 +1,10 @@
+[{
+    "users":[{
+        "userName":"Claudio",
+        "password":"$2b$10$oYUpNKjFJI6tI2K9I63v6ekaNBDQbG2.akOIrLNxeq4tvv49t2ZpO",
+        "_id": {
+            "$oid": "6286d58568fca59457c8007d"
+        }
+    }]
+
+}]
