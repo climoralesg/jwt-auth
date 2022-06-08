@@ -2,7 +2,8 @@ const jwt=require('jsonwebtoken');
 
 const dbName='login';
 
-const {connect}=require('../config/database.js');
+const db=require('../config/database.js');
+
 const {response} = require("express");
 const {request} = require("express");
 
@@ -29,9 +30,9 @@ const login = async (req=request,res=response)=>{
     const password=req.body.password;
     const userName=req.body.userName;
     const userToken=req.headers['access-token'];
-    const client = connect();
-    const db=client.db('login')
-    const users=db.collection('users');
+
+    const database=db.getDB();
+    const users=database.collection('users');
     const query = await users.findOne({ userName: req.body.userName },"");
     bcrypt.compare(password,query.password,function(err,result){
         if(result===true){
