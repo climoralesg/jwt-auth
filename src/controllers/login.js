@@ -41,11 +41,13 @@ const login = async (req=request,res=response)=>{
             res.json({respuesta: "Usuario correcto y/o contraseña incorrectos",status:400});
         }
     });
-        
-    
-
 }
 
 
-module.exports={login,changePasswordBcrypt}
+const testlogin=(req=request,res=response)=>{
+    res.status(200).json({respuesta: "Hola Usuario",statusCode:200});
+}
+
+
+module.exports={login,changePasswordBcrypt,testlogin}
 
