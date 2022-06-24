@@ -10,10 +10,11 @@ const databaseName=process.env.DB_NAME;
 const connectionOptions = { poolSize: process.env.MONGO_DB_POOLSIZE || 1 };
 
 let database;
+let client;
 
 
 const connect= async ()=>{
-    const client= await MongoClient.connect(url);
+    client= await MongoClient.connect(url);
     database = client.db('login');
 }
 
