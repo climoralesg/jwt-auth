@@ -5,10 +5,18 @@ const validateInputs=(req,res,next)=>{
     const nullValues=credentialsValues.includes(null);
     
     if(req.body.userName==undefined || req.body.password==undefined){
-        res.json({respuesta: "Se necesitan datos",status:404});
+        res.status(200).json({
+            respuesta: "Se necesitan datos",
+            statusCode:200,
+            internalCode:3,
+        });
     }else{
         if(empty==true || nullValues==true){
-            res.json({respuesta: "Se necesitan datos",status:404});
+            res.status(200).json({
+                respuesta: "Se necesitan datos",
+                statusCode:200,
+                internalCode:3
+            });
         }else{
             next();
         }

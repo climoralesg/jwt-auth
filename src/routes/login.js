@@ -7,7 +7,7 @@ const {verifyToken}=require('../middlewares/verifyToken');
 
 const router=Router();
 
-router.get("/login",[validateInputs,verifyToken],login);
+router.get("/login",[verifyToken,validateInputs],login);
 
 router.get("/testlogin",testlogin);
 
